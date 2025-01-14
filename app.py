@@ -3,6 +3,11 @@ from health_utils import calculate_bmi, calculate_bmr
 
 app = Flask(__name__)
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return 'OK', 200
+
+
 @app.route('/bmi', methods=['POST'])
 def bmi():
     data = request.get_json()
