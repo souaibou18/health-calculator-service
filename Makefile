@@ -10,27 +10,27 @@ help:
 	@echo "  test-api   Test the API endpoints"
 
 init:
-	@echo "Installing dependencies..."
-	pip install -r requirements.txt
+	@echo "Setting up the virtual environment..."
+	python3 -m venv .venv
+	@echo "Activating the virtual environment..."
+	. .venv/bin/activate
 
-# Installe les dépendances du projet (synonyme de init)
 install: init
+	@echo "Installing dependencies..."
+	. .venv/bin/activate && pip install -r requirements.txt
 
-# Build l'image Docker
 build:
 	@echo "Building the Docker image..."
 	docker build -t health-calculator-service .
 
-# Lancer l'application Flask
 run:
 	@echo "Running the Flask app..."
 	python app.py
 
-# Exécuter les tests unitaires
 test:
 	@echo "Running unit tests..."
 	python -m unittest test.py
-# Tester les endpoints de l'API avec curl (exemple simple)
+
 test-api:
 	@echo "Testing API endpoints..."
 	curl -X GET http://localhost:5001/health

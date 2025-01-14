@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Calculator</title>
+</head>
+
+<body>
+    <h1>Welcome to the Health Calculator App</h1>
+    <p>Click the button below to check the health of the app:</p>
+    <button onclick="fetchHealth()">Check Health</button>
+    <p id="health-status"></p>
+
+    <script>
+        async function fetchHealth() {
+            const response = await fetch('/health');
+            if (response.ok) {
+                const text = await response.text();
+                document.getElementById('health-status').textContent = `Status: ${text}`;
+            } else {
+                document.getElementById('health-status').textContent = 'Error: Unable to fetch health status';
+            }
+        }
+    </script>
+</body>
+
+</html>
