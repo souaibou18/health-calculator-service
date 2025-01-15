@@ -16,7 +16,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: make
+      run: make install
 
     - name: test
       run: make test
