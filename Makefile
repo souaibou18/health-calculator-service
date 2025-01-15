@@ -2,8 +2,8 @@
 
 help:
 	@echo "Makefile commands:"
-	@echo "  init       Install project dependencies"
-	@echo "  install    Install project dependencies (same as init)"
+	@echo "  init       Setup and Activate the virtual environment"
+	@echo "  install    Install project dependencies"
 	@echo "  build      Build the Docker image"
 	@echo "  run        Run the Flask application"
 	@echo "  test       Run the unit tests"
