@@ -2,12 +2,12 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - python-app-elyess
+name: Build and deploy Python app to Azure Web App - calcule-taill
 
 on:
   push:
     branches:
-      - main
+      - souaibou18-patch-1
   workflow_dispatch:
 
 jobs:
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_00F8DE1420A547BB991E90AC381B41FB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1B0366FBEAAF4BE3B90169DF1C174C39 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_096E16DC4F3F4172B82B794EF83745FA }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B935EF1C5F34409EAE709619EBCA05E6 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7909AC6CA60846F6A8210A8BC8046D64 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1068885F5C9C4C2C893D1F04AE74F219 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'python-app-elyess'
+          app-name: 'calcule-taill'
           slot-name: 'Production'
           

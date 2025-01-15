@@ -1,37 +1,25 @@
-from flask import Flask, request, jsonify, render_template
-from health_utils import calculate_bmi, calculate_bmr
+from flask import Flask, render_template, request, jsonify
+from utils import calculate_monthly_payment, calculate_total_cost
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('home.html')
 
-@app.route('/health', methods=['GET'])
-def health_check():
-    return 'OK', 200
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    loan_amount = float(request.form['loan_amount'])
+    duration_years = int(request.form['duration'])
+    annual_interest_rate = float(request.form['interest_rate'])
 
-@app.route('/bmi', methods=['POST'])
-def bmi():
-    data = request.get_json()
-    height = data.get('height') 
-    weight = data.get('weight') 
-    if not height or not weight:
-        return jsonify({"error": "Height and weight are required"}), 400
-    bmi_value = calculate_bmi(height, weight)
-    return jsonify({"bmi": round(bmi_value, 2)})
+    monthly_payment = calculate_monthly_payment(loan_amount, duration_years, annual_interest_rate)
+    total_cost = calculate_total_cost(monthly_payment, duration_years)
 
-@app.route('/bmr', methods=['POST'])
-def bmr():
-    data = request.get_json()
-    height = data.get('height') 
-    weight = data.get('weight') 
-    age = data.get('age')
-    gender = data.get('gender') 
-    if not all([height, weight, age, gender]):
-        return jsonify({"error": "Height, weight, age, and gender are required"}), 400
-    bmr_value = calculate_bmr(height, weight, age, gender)
-    return jsonify({"bmr": round(bmr_value, 2)})
+    return jsonify({
+        'monthly_payment': monthly_payment,
+        'total_cost': total_cost
+    })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(debug=True)
