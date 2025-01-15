@@ -15,9 +15,6 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: configure
-      run: ./configure
-
     - name: Install dependencies
       run: make
 
